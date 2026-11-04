@@ -25,7 +25,8 @@ describe('flow', () => {
     const base = ['Get a quote', 'Drain Cleaning', 'Standard', 'Book this', 'Sam Lee']
     expect(text(run([...base, 'nope']))).toMatch(/email/)
     expect(text(run([...base, 'sam@example.com', '555123456']))).toMatch(/10-digit/)
-    expect(text(run([...base, 'sam@example.com', '9165551234', '90210']))).toMatch(/outside our service area/)
+    expect(text(run([...base, 'sam@example.com', '9165551234']))).toMatch(/ZIP code\? \(for example 95677/)
+    expect(text(run([...base, 'sam@example.com', '9165551234', '90210']))).toMatch(/outside our area \(Rocklin 95677/)
     const done = run([...base, 'sam@example.com', '(916) 555-1234', '95677', 'Confirm'])
     expect(done.lead?.city).toBe('Rocklin')
   })

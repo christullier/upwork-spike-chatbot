@@ -1,5 +1,5 @@
 import { FAQ } from '../data/faq'
-import { PHONE, SERVICE_AREA } from '../data/serviceArea'
+import { AREA_PLACES, PHONE, SERVICE_AREA } from '../data/serviceArea'
 import { SERVICES, URGENCIES } from '../data/services'
 import { calcQuote } from './quote'
 import { classify } from './nlu'
@@ -93,7 +93,7 @@ function askCurrent(state: FlowState, prefix?: string): FlowResult {
     'lead.name': ['What is your full name?', []],
     'lead.email': ['What is your email address?', []],
     'lead.phone': ['What is a good phone number?', []],
-    'lead.zip': ['What is your ZIP code?', []],
+    'lead.zip': [`What is your ZIP code? (for example ${AREA_PLACES.slice(0, 3).map((p) => p.zip).join(', ')})`, []],
   }
   const [text, chips] = q[state.step] ?? ['How can I help?', MAIN_CHIPS]
   return { state, replies: [t((prefix ? prefix + ' ' : '') + text)], chips }
@@ -160,9 +160,10 @@ export function step(state: FlowState, input: string, sessionId: string): FlowRe
       const z = text.replace(/\D/g, '').slice(0, 5)
       if (!/^\d{5}$/.test(text.trim().slice(0, 5)) || z.length !== 5) return askCurrent(state, 'Please enter a 5-digit ZIP code.')
       if (!SERVICE_AREA[z]) {
+        const places = AREA_PLACES.map((p) => `${p.city} ${p.zip}`).join(', ')
         return {
           state, chips: ['Talk to a human'],
-          replies: [t(`Sorry, ${z} is outside our service area (Rocklin, Roseville, Loomis, Granite Bay, Folsom, Orangevale, Auburn). Try another ZIP, or call ${PHONE}.`)],
+          replies: [t(`Sorry, ${z} is outside our area (${places}). Try another ZIP, or call ${PHONE}.`)],
         }
       }
       const nd = { ...d, zip: z }
