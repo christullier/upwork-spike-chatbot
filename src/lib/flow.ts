@@ -92,7 +92,7 @@ function askCurrent(state: FlowState, prefix?: string): FlowResult {
     'quote.urgency': ['When do you need it?', urgencyChips],
     'lead.name': ['What is your full name?', []],
     'lead.email': ['What is your email address?', []],
-    'lead.phone': ['What is the best phone number?', []],
+    'lead.phone': ['What is a good phone number?', []],
     'lead.zip': ['What is your ZIP code?', []],
   }
   const [text, chips] = q[state.step] ?? ['How can I help?', MAIN_CHIPS]
