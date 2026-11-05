@@ -104,7 +104,7 @@ export default function ChatWidget() {
               <div className="text-sm font-semibold leading-tight">Summit Assist</div>
               <div className="flex items-center gap-1.5 text-xs text-brand-100"><span className="h-2 w-2 rounded-full bg-emerald-300" />Online · replies instantly</div>
             </div>
-            <button onClick={() => setOpen(false)} aria-label="Close chat" className="rounded-lg p-2 hover:bg-white/10">
+            <button onClick={() => setOpen(false)} aria-label="Close chat" className="flex items-center justify-center rounded-lg p-2 hover:bg-white/10 max-sm:h-11 max-sm:w-11">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
             </button>
           </header>
@@ -133,7 +133,7 @@ export default function ChatWidget() {
           {chips.length > 0 && !typing && (
             <div className="flex flex-wrap gap-2 border-t border-slate-100 bg-slate-50 px-4 pb-2 pt-2">
               {chips.map((c) => (
-                <button key={c} onClick={() => send(c)} className="rounded-full border border-brand-600 bg-white px-3 py-1.5 text-xs font-medium text-brand-700 transition hover:bg-brand-50">
+                <button key={c} onClick={() => send(c)} className="inline-flex items-center rounded-full border border-brand-600 bg-white px-3 py-1.5 text-xs font-medium text-brand-700 transition hover:bg-brand-50 max-sm:min-h-11">
                   {c}
                 </button>
               ))}
@@ -143,7 +143,7 @@ export default function ChatWidget() {
           <form onSubmit={(e) => { e.preventDefault(); send(input) }} className="flex items-center gap-2 border-t border-slate-200 bg-white p-3 sm:rounded-b-2xl">
             <input ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type your message…" aria-label="Message"
               className="flex-1 rounded-full border border-slate-300 bg-slate-50 px-4 py-2.5 text-base outline-none focus:border-brand-600 focus:bg-white sm:text-sm" />
-            <button type="submit" disabled={!input.trim()} className="rounded-full bg-brand-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-800 disabled:opacity-40">Send</button>
+            <button type="submit" disabled={!input.trim()} className="rounded-full bg-brand-700 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-800 disabled:opacity-40 max-sm:min-h-11">Send</button>
           </form>
         </div>
       )}

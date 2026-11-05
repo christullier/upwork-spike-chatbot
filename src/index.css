@@ -18,3 +18,28 @@ button { cursor: pointer; font-family: inherit; }
 .dot { animation: bounce-dot 1.2s infinite; }
 @keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98) } to { opacity: 1; transform: none } }
 .pop { animation: pop .18s ease-out; }
+
+/* Mobile: stack each rate-table row as a card so no column is clipped. */
+@media (max-width: 640px) {
+  .rate-table { min-width: 0; }
+  .rate-table thead { display: none; }
+  .rate-table,
+  .rate-table tbody,
+  .rate-table tr,
+  .rate-table td { display: block; width: 100%; }
+  .rate-table tr { padding: 0.875rem 1rem; border-top: 1px solid #e2e8f0; }
+  .rate-table tbody tr:first-child { border-top: 0; }
+  .rate-table td { padding: 0; }
+  .rate-table td + td { margin-top: 0.25rem; }
+  .rate-table td:first-child { font-size: 1rem; font-weight: 600; }
+  .rate-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #475569;
+  }
+}
+
